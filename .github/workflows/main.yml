@@ -22,7 +22,7 @@ jobs:
         cd ddnet
         mkdir build
         cd build
-        cmake ..
+        cmake -DVULKAN=OFF ..
         make
 
     - name: Run ddnet-server
