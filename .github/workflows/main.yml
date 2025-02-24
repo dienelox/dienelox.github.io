@@ -1,0 +1,31 @@
+name: Build and Run ddnet-server
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git cmake g++ libglu1-mesa-dev
+
+    - name: Clone ddnet repository
+      run: git clone https://github.com/ddnet/ddnet.git
+
+    - name: Build ddnet-server
+      run: |
+        cd ddnet
+        mkdir build
+        cd build
+        cmake ..
+        make
+
+    - name: Run ddnet-server
+      run: |
+        cd ddnet/build
+        ./ddnet-server
